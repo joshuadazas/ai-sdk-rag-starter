@@ -185,7 +185,7 @@ export function DocumentUpload() {
 
       {/* Help Text */}
       <div className="mt-4 text-xs text-gray-500 space-y-1">
-        <p>💡 <strong>Tip:</strong> Name files like "P-018-001 Policy Name.pdf" to auto-detect policy numbers</p>
+        <p>💡 <strong>Tip:</strong> Name files like &quot;P-018-001 Policy Name.pdf&quot; to auto-detect policy numbers</p>
         <p>📚 Uploaded documents are automatically embedded and made searchable</p>
       </div>
     </div>

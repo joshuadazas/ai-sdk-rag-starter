@@ -88,7 +88,7 @@ export default function Chat() {
                 Welcome to Audit Assistant
               </h1>
               <p className="text-gray-600">
-                Ask questions about Ontop's policies and procedures or try one of these:
+                Ask questions about Ontop&apos;s policies and procedures or try one of these:
               </p>
             </div>
 
@@ -162,7 +162,7 @@ export default function Chat() {
                           </div>
                         ) : (
                           /* Tool Results */
-                          <div className="space-y-2">
+                          <>
                             {/* Input Parameters */}
                             <details className="group">
                               <summary className="cursor-pointer text-xs font-medium text-blue-700 hover:text-blue-900 list-none flex items-center gap-1">
@@ -170,7 +170,7 @@ export default function Chat() {
                                 View Parameters
                               </summary>
                               <pre className="mt-2 bg-white p-3 rounded text-xs overflow-auto border border-blue-100">
-                                {'input' in part ? JSON.stringify(part.input, null, 2) : 'No input'}
+                                {String('input' in part && part.input ? JSON.stringify(part.input, null, 2) : 'No input')}
                               </pre>
                             </details>
 
@@ -182,11 +182,11 @@ export default function Chat() {
                                   Results
                                 </summary>
                                 <pre className="mt-2 bg-white p-3 rounded text-xs overflow-auto border border-blue-100 max-h-64">
-                                  {JSON.stringify(part.output, null, 2)}
+                                  {String(JSON.stringify(part.output, null, 2))}
                                 </pre>
                               </details>
                             )}
-                          </div>
+                          </>
                         )}
                       </div>
                     );
