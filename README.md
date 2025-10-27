@@ -1,14 +1,15 @@
-# Vercel AI SDK RAG Guide Starter Project
+# Audit Assistant
 
-This is the starter project for the Vercel AI SDK [Retrieval-Augmented Generation (RAG) guide](https://sdk.vercel.ai/docs/guides/rag-chatbot).
+This is the starter project for the Audit Assistant.
 
-In this project, you will build a chatbot that will only respond with information that it has within its knowledge base. The chatbot will be able to both store and retrieve information. This project has many interesting use cases from customer support through to building your own second brain!
+In this project, we tackle a common challenge in internal audit teams responsible for reviewing and auditing policies and procedures. They must analize controls according to policies and procedures and following a framework, such as ISO 27001, SOC 2, etc.
 
-This project will use the following stack:
+The project is an audit assistant that will only respond with information that it has within its knowledge base. The assistant will be able to both store and retrieve information. 
 
-- [Next.js](https://nextjs.org) 14 (App Router)
-- [Vercel AI SDK](https://sdk.vercel.ai/docs)
-- [OpenAI](https://openai.com)
-- [Drizzle ORM](https://orm.drizzle.team)
-- [Postgres](https://www.postgresql.org/) with [ pgvector ](https://github.com/pgvector/pgvector)
-- [shadcn-ui](https://ui.shadcn.com) and [TailwindCSS](https://tailwindcss.com) for styling
+This project uses the Vercel AI SDK to build the assistant. The assistant receives documents such as `pdf`, `txt`, `md` files and uses LlamaParse to parse the documents and extract the text. The text is then intelligently chunked using semantic segmentation (by markdown headers and paragraphs to preserve context) and converted into embeddings using OpenAI's `text-embedding-ada-002` model. These embeddings are high-dimensional numerical vectors that capture the semantic meaning of the text. When users ask questions, the assistant converts the query into an embedding and uses cosine similarity search to find the most relevant document chunks from the vector database, enabling precise, context-aware answers about the policies and procedures. 
+
+The assistant is able to:
+
+- Ask questions about Ontop's policies and procedures
+- Search the knowledge base for information
+- Use predefined prompts to start a conversation
