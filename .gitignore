@@ -9,6 +9,10 @@
 # testing
 /coverage
 
+# claude docs folder
+/claudedocs
+/policies_and_procedures
+/pdfbase
 # next.js
 /.next/
 /out/

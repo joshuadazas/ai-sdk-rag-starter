@@ -11,6 +11,10 @@ export const resources = pgTable("resources", {
     .$defaultFn(() => nanoid()),
   content: text("content").notNull(),
 
+  // Source tracking fields for compliance documents
+  sourceFile: text("source_file"),        // e.g., "P-018-001 Information Security Policy.pdf"
+  policyNumber: varchar("policy_number", { length: 50 }), // e.g., "P-018"
+
   createdAt: timestamp("created_at")
     .notNull()
     .default(sql`now()`),

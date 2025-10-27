@@ -6,19 +6,39 @@ import {
   resources,
 } from '@/lib/db/schema/resources';
 import { db } from '../db';
+import { generateEmbeddings } from '../ai/embedding';
+import { embeddings as embeddingsTable } from '../db/schema/embedding';
 
 export const createResource = async (input: NewResourceParams) => {
   try {
-    const { content } = insertResourceSchema.parse(input);
+    const { content, sourceFile, policyNumber } = insertResourceSchema.parse(input);
 
     const [resource] = await db
       .insert(resources)
-      .values({ content })
+      .values({
+        content,
+        sourceFile: sourceFile || null,
+        policyNumber: policyNumber || null,
+      })
       .returning();
 
-    return 'Resource successfully created.';
-  } catch (e) {
-    if (e instanceof Error)
-      return e.message.length > 0 ? e.message : 'Error, please try again.';
+    const embeddings = await generateEmbeddings(content);
+
+    if (embeddings.length === 0) {
+      throw new Error('No embeddings generated - content may be too short');
+    }
+
+    await db.insert(embeddingsTable).values(
+      embeddings.map(embedding => ({
+        resourceId: resource.id,
+        ...embedding,
+      })),
+    );
+
+    return `Resource successfully created and embedded. (${embeddings.length} chunks created)`;
+  } catch (error) {
+    return error instanceof Error && error.message.length > 0
+      ? error.message
+      : 'Error, please try again.';
   }
 };

@@ -13,18 +13,23 @@
     "db:pull": "drizzle-kit introspect",
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
-    "db:check": "drizzle-kit check"
+    "db:check": "drizzle-kit check",
+    "ingest": "tsx scripts/ingest-policies.ts"
   },
   "dependencies": {
+    "@ai-sdk/openai": "^2.0.52",
+    "@ai-sdk/react": "^2.0.70",
     "@radix-ui/react-avatar": "^1.1.0",
     "@radix-ui/react-dropdown-menu": "^2.1.1",
     "@radix-ui/react-label": "^2.1.0",
     "@radix-ui/react-slot": "^1.1.0",
     "@t3-oss/env-nextjs": "^0.10.1",
+    "ai": "^5.0.70",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "drizzle-orm": "^0.31.2",
     "drizzle-zod": "^0.5.1",
+    "llamaindex": "^0.12.0",
     "lucide-react": "^0.396.0",
     "nanoid": "^5.0.7",
     "next": "14.2.4",
@@ -38,7 +43,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@types/node": "^20",
+    "@types/node": "^20.19.23",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "dotenv": "^16.4.5",
@@ -49,6 +54,6 @@
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "tsx": "^4.15.7",
-    "typescript": "^5"
+    "typescript": "^5.9.3"
   }
 }
