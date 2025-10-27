@@ -19,8 +19,12 @@ export async function parsePdfWithLlamaParse(
   // Create FormData for multipart/form-data upload
   const formData = new FormData();
 
-  // Add file as Blob
-  const fileBlob = new Blob([fileBuffer], { type: 'application/pdf' });
+  // Add file as Blob - convert Buffer to ArrayBuffer if needed
+  const arrayBuffer = fileBuffer instanceof Buffer 
+    ? fileBuffer.buffer.slice(fileBuffer.byteOffset, fileBuffer.byteOffset + fileBuffer.byteLength)
+    : fileBuffer;
+  
+  const fileBlob = new Blob([arrayBuffer], { type: 'application/pdf' });
   formData.append('file', fileBlob, fileName);
 
   // Specify result type as markdown
